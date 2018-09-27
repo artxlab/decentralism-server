@@ -24,8 +24,8 @@ router.get('/:addr', function(req, res) {
 /* Create a userInfo record and save it into db*/
 router.put('/', function(req, res) {
   console.log(req.body.addr);
-  let userInsert = `INSERT INTO UserInfo(address, email) VALUES(?,?)`;
-  db.query(userInsert, [req.body.addr,req.body.email], (err, result, fields) => {
+  let userInsert = `INSERT INTO UserInfo(address, email) VALUES(?,?) ON DUPLICATE KEY UPDATE email = ?`;
+  db.query(userInsert, [req.body.addr,req.body.email, req.body.email], (err, result, fields) => {
     if (err) {
       var duplicateEntryMsg = req.body.email + ' has been used before, try another email address';
       res.json({'message' : duplicateEntryMsg});

@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 var code = require('./routes/code');
 var email = require('./routes/email');
+var saveReferral = require('/routes/saveReferral');
 // initialize our express app
 const app = express();
 
@@ -15,5 +16,6 @@ app.listen(port, () => {
 });
 app.use('/code', code);
 app.use('/register', email);
+app.use('/referral', saveReferral);
 
 module.exports = app;
